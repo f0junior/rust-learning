@@ -1,35 +1,22 @@
-use rand::Rng;
-use std::cmp::Ordering;
-use std::io;
-
 fn main() {
-    println!("Adivinhe o número!");
+    // variáveis são imatáveis por padrão.
+    let nome = "Francisco";
+    println!("Meu nome é {}", nome);
 
-    let numero_secreto: u32 = rand::thread_rng().gen_range(1..=100);
+    // para uma variável se tornar mutável é necessário
+    // acrescentar o termo mut antes do nome da variável.
+    // O tipo não pode ser alterado.
 
-    loop {
-        println!("Digite o seu palpite.");
+    let mut x = 5;
+    x = x * 2;
+    println!("Valor de X é {}", x);
 
-        let mut palpite = String::new();
+    // com Shadowing é possível alterar o valor de
+    // uma variável imutável definindo ela novamente
+    // com let, mas nesse caso é possível alterar o
+    // tipo da variável.
 
-        io::stdin()
-            .read_line(&mut palpite)
-            .expect("Falha ao ler entrada");
-
-        let palpite: u32 = match palpite.trim().parse() {
-            Ok(num) => num,
-            Err(_) => continue,
-        };
-
-        println!("Você digitou: {}", palpite);
-
-        match palpite.cmp(&numero_secreto) {
-            Ordering::Less => println!("Muito baixo!!"),
-            Ordering::Greater => println!("Muito alto!!"),
-            Ordering::Equal => {
-                println!("Você acertou!!");
-                break;
-            }
-        }
-    }
+    let espacos = "        ";
+    let espacos = espacos.len();
+    println!("Número de espaços {}", espacos);
 }
